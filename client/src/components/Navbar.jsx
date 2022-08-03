@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { signOut } from "firebase/auth";
@@ -29,8 +29,20 @@ const Pages = styled.div`
   }
 `;
 
-const Navbar = ({ isUserLoggedIn }) => {
-  console.log(isUserLoggedIn);
+const Navbar = ({ currentUser }) => {
+  console.log("isUserLoggedIn", currentUser);
+  const [showLogoutButton, setShowLogoutButton] = useState(null);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setShowLogoutButton(true);
+      console.log("user is logged in", currentUser);
+    } else {
+      setShowLogoutButton(false);
+      console.log("user is signed out");
+    }
+  });
+
   const logoutFromFirebase = async () => {
     try {
       await signOut(auth);
@@ -56,7 +68,7 @@ const Navbar = ({ isUserLoggedIn }) => {
         </Link>
       </Pages>
       <div>
-        <If condition={isUserLoggedIn}>
+        <If condition={showLogoutButton}>
           <button onClick={logoutFromFirebase}>logout</button>
         </If>
       </div>

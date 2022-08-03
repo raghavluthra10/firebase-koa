@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
@@ -24,16 +24,9 @@ function App() {
     }
   });
 
-  // const checkIfUserIsLoggedIn = () => {
-  // };
-
-  // useEffect(() => {
-  //   checkIfUserIsLoggedIn();
-  // }, []);
-
   return (
     <div className="">
-      <Navbar isUserLoggedIn={currentUser ? true : false} />
+      <Navbar currentUser={currentUser} />
       <Routes>
         <Route exact path="/home" element={<Home />} />
         <Route exact path="/guest" element={<Guest />} />

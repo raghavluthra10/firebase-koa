@@ -27,6 +27,10 @@ const Login = () => {
   const loginOnClick = async (e) => {
     e.preventDefault();
     console.log("loginOnClick");
+    if (!loginInfo.email || !loginInfo.password) {
+      alert("please fill all details");
+      return;
+    }
     try {
       const user = await signInWithEmailAndPassword(
         auth,
@@ -34,6 +38,10 @@ const Login = () => {
         loginInfo.password
       );
       console.log("user after signup -->", user);
+      setLoginInfo({
+        email: "",
+        password: "",
+      });
     } catch (error) {
       console.log(error.message);
     }
