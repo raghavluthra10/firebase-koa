@@ -28,6 +28,15 @@ const Signup = () => {
   const signUpOnClick = async (e) => {
     e.preventDefault();
     console.log("signUpOnClick");
+    if (!signUpInfo.email || !signUpInfo.password || !signUpInfo.cPassword) {
+      alert("please fill in all details");
+
+      return;
+    }
+    if (signUpInfo.password !== signUpInfo.cPassword) {
+      alert("Your passwords dont match");
+      return;
+    }
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
