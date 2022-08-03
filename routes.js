@@ -5,7 +5,7 @@ const { homePage, guestPage } = require("./controllers");
 
 router.get("/guest", guestPage);
 
-// router.post('/login')
+// router.post('/login',)
 
 // router.post('signup')
 
