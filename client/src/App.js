@@ -17,8 +17,7 @@ function App() {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       const uid = user.uid;
-      setCurrentUser(uid);
-      console.log("user is logged in", currentUser);
+      setCurrentUser(user);
     } else {
       console.log("user is signed out");
     }
@@ -29,7 +28,7 @@ function App() {
       <Navbar currentUser={currentUser} />
       <Routes>
         <Route exact path="/home" element={<Home />} />
-        <Route exact path="/guest" element={<Guest />} />
+        <Route exact path="/" element={<Guest />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/login" element={<Login />} />
       </Routes>

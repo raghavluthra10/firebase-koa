@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
@@ -30,22 +30,12 @@ const Pages = styled.div`
 `;
 
 const Navbar = ({ currentUser }) => {
-  console.log("isUserLoggedIn", currentUser);
-  const [showLogoutButton, setShowLogoutButton] = useState(null);
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setShowLogoutButton(true);
-      console.log("user is logged in", currentUser);
-    } else {
-      setShowLogoutButton(false);
-      console.log("user is signed out");
-    }
-  });
+  let navigate = useNavigate();
 
   const logoutFromFirebase = async () => {
     try {
       await signOut(auth);
+      // navigate("/");
     } catch (error) {
       console.log(error.message);
     }
@@ -57,7 +47,7 @@ const Navbar = ({ currentUser }) => {
         <Link to="/home">
           <span>Home</span>
         </Link>
-        <Link to="/guest">
+        <Link to="/">
           <span>Guest</span>
         </Link>
         <Link to="/signup">
@@ -68,7 +58,7 @@ const Navbar = ({ currentUser }) => {
         </Link>
       </Pages>
       <div>
-        <If condition={showLogoutButton}>
+        <If condition={currentUser}>
           <button onClick={logoutFromFirebase}>logout</button>
         </If>
       </div>

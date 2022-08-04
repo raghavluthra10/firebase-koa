@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   padding: 50px 100px;
@@ -19,6 +20,7 @@ const Form = styled.form`
 `;
 
 const Signup = () => {
+  let navigate = useNavigate();
   const [signUpInfo, setSignUpInfo] = useState({
     email: "",
     password: "",
@@ -43,6 +45,8 @@ const Signup = () => {
         signUpInfo.email,
         signUpInfo.password
       );
+      // navigate("/home");
+
       console.log("user email => ", auth.currentUser.email);
       console.log("user after signup -->", user);
     } catch (error) {
