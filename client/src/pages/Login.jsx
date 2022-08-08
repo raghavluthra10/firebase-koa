@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   padding: 50px 100px;
@@ -20,7 +20,7 @@ const Form = styled.form`
 `;
 
 const Login = () => {
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -39,8 +39,8 @@ const Login = () => {
         loginInfo.email,
         loginInfo.password
       );
-      // navigate("/home");
-      console.log("user after signup -->", user);
+      navigate("/home");
+      sessionStorage.setItem("Auth Token", user);
       setLoginInfo({
         email: "",
         password: "",

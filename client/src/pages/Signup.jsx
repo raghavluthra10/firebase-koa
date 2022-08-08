@@ -45,10 +45,8 @@ const Signup = () => {
         signUpInfo.email,
         signUpInfo.password
       );
-      // navigate("/home");
-
-      console.log("user email => ", auth.currentUser.email);
-      console.log("user after signup -->", user);
+      navigate("/home");
+      sessionStorage.setItem("Auth Token", user);
     } catch (error) {
       console.log(error.message);
     }

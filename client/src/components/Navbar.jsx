@@ -29,13 +29,14 @@ const Pages = styled.div`
   }
 `;
 
-const Navbar = ({ currentUser }) => {
+const Navbar = () => {
   let navigate = useNavigate();
 
   const logoutFromFirebase = async () => {
     try {
       await signOut(auth);
-      // navigate("/");
+      navigate("/");
+      sessionStorage.removeItem("Auth Token");
     } catch (error) {
       console.log(error.message);
     }
@@ -58,9 +59,7 @@ const Navbar = ({ currentUser }) => {
         </Link>
       </Pages>
       <div>
-        <If condition={currentUser}>
-          <button onClick={logoutFromFirebase}>logout</button>
-        </If>
+        <button onClick={logoutFromFirebase}>logout</button>
       </div>
     </Nav>
   );
