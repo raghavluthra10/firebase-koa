@@ -36,7 +36,7 @@ const Navbar = () => {
     try {
       await signOut(auth);
       navigate("/");
-      sessionStorage.removeItem("Auth Token");
+      localStorage.removeItem("Auth Token");
     } catch (error) {
       console.log(error.message);
     }

@@ -46,7 +46,7 @@ const Signup = () => {
         signUpInfo.password
       );
       navigate("/home");
-      sessionStorage.setItem("Auth Token", user);
+      localStorage.setItem("Auth Token", user);
     } catch (error) {
       console.log(error.message);
     }

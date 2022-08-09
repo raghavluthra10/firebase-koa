@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  sendSignInLinkToEmail,
+} from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 
@@ -26,6 +29,8 @@ const Login = () => {
     password: "",
   });
 
+  const [signInWithEmail, setSignInWithEmail] = useState("");
+
   const loginOnClick = async (e) => {
     e.preventDefault();
     console.log("loginOnClick");
@@ -40,11 +45,27 @@ const Login = () => {
         loginInfo.password
       );
       navigate("/home");
-      sessionStorage.setItem("Auth Token", user);
+      localStorage.setItem("Auth Token", user);
       setLoginInfo({
         email: "",
         password: "",
       });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const sendLinkForLogin = async (e) => {
+    e.preventDefault();
+    const actionCodeSettings = {
+      url: `http://localhost:3000/login`,
+      handleCodeInApp: true,
+    };
+
+    try {
+      await sendSignInLinkToEmail(auth, signInWithEmail, actionCodeSettings);
+      window.localStorage.setItem("emailForSignIn", signInWithEmail);
+      console.log("sendLinkForLogin", signInWithEmail);
     } catch (error) {
       console.log(error.message);
     }
@@ -73,6 +94,20 @@ const Login = () => {
 
         <button type="submit">Login</button>
       </Form>
+      <br />
+      <div>
+        <h3>Or</h3>
+        <h5>Sign in with email link</h5>
+        <form onSubmit={sendLinkForLogin}>
+          <input
+            type="text"
+            placeholder="example@email.com"
+            value={signInWithEmail}
+            onChange={(e) => setSignInWithEmail(e.target.value)}
+          />
+          <button type="submit">send link</button>
+        </form>
+      </div>
     </Container>
   );
 };
