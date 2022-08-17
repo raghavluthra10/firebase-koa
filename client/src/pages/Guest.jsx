@@ -17,6 +17,7 @@ const Guest = () => {
       .then((res) => res.json())
       .then((result) => {
         setData(result.data);
+
       })
       .catch((err) => console.error(err));
   }, []);
