@@ -1,3 +1,5 @@
+const path = require('path')
+
 // guest page
 
 const randomArr = [
@@ -9,7 +11,8 @@ const randomArr = [
 
 const guestPage = async (ctx) => {
   try {
-    ctx.body = { data: randomArr, success: true };
+    const dirname = path.join( __dirname ,'../client/build/index.html') 
+    ctx.body = { data: randomArr, success: true, dirname };
   } catch (error) {
     ctx.body = { success: false };
     console.error(error);

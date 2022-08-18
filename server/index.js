@@ -5,6 +5,7 @@ const BodyParser = require("koa-bodyparser");
 const auth = require("koa-basic-auth");
 const cors = require("@koa/cors");
 const appRoutes = require("./routes");
+const path = require('path')
 const serve = require("koa-static");
 
 const router = new Router();
@@ -12,7 +13,7 @@ const router = new Router();
 app.use(serve(__dirname + '/build'));
 
 router.get('/', (ctx) => {
-    ctx.body = serve(__dirname + '/build/index.html')
+    ctx.body = serve(path.join( __dirname ,'../client/build/index.html'))
 })
 
 app.use(cors());
