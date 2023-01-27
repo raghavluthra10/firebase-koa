@@ -45,16 +45,16 @@ const Navbar = () => {
   return (
     <Nav>
       <Pages>
-        <Link to="/home">
+        <Link to="/#/home">
           <span>Home</span>
         </Link>
-        <Link to="/">
+        <Link to="/#/">
           <span>Guest</span>
         </Link>
-        <Link to="/signup">
+        <Link to="/#/signup">
           <span>Sign up</span>
         </Link>
-        <Link to="/login">
+        <Link to="/#/login">
           <span>Login</span>
         </Link>
       </Pages>

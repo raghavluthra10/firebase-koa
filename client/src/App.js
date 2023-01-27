@@ -28,16 +28,16 @@ function App() {
     <React.Fragment>
       <Navbar />
       <Routes>
-        <Route exact path="/signup" element={<Signup />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/" element={<Guest />} />
+        <Route exact path="/#/signup" element={<Signup />} />
+        <Route exact path="/#/login" element={<Login />} />
+        <Route exact path="/#/" element={<Guest />} />
         {/* <PrivateRoute exact path="/home" element={<Home />} /> */}
         <Route element={<PrivateRoute />}>
-          <Route path="/home" exact element={<Home />} />
+          <Route path="/#/home" exact element={<Home />} />
         </Route>
       </Routes>
     </React.Fragment>
-  );
+  )
 }
 
 export default App;
